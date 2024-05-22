@@ -1,43 +1,44 @@
 columns:
-  - pregnancies: int
-  - glucose: int
-  - blood_pressure: int
-  - skin_thickness: int
-  - insulin: int
-  - bmi: float
-  - diabetes_pedigree_function: float
-  - age: int
-  - outcome: category
+  - Pregnancies: int
+  - Glucose: int
+  - BloodPressure: int
+  - SkinThickness: int
+  - Insulin: int
+  - BMI: float
+  - DiabetesPedigreeFunction: float
+  - Age: int
+  - Outcome: category
 
 numerical_columns:
-  - pregnancies
-  - glucose
-  - blood_pressure
-  - skin_thickness
-  - insulin
-  - bmi
-  - diabetes_pedigree_function
-  - age
+  - Pregnancies
+  - Glucose
+  - BloodPressure
+  - SkinThickness
+  - Insulin
+  - BMI
+  - DiabetesPedigreeFunction
+  - Age
 
 categorical_columns:
-  - outcome
+  - Outcome
 
 drop_columns: []
 
 # for data transformation
 num_features:
-  - pregnancies
-  - glucose
-  - blood_pressure
-  - skin_thickness
-  - insulin
-  - bmi
-  - diabetes_pedigree_function
-  - age
+  - Pregnancies
+  - Glucose
+  - BloodPressure
+  - SkinThickness
+  - Insulin
+  - BMI
+  - DiabetesPedigreeFunction
+  - Age
 
 or_columns: []
 
 oh_columns:
-  - outcome
+  - Outcome
 
 transform_columns: []
+
