@@ -1,0 +1,65 @@
+grid_search:
+  class: GridSearchCV
+  module: sklearn.model_selection
+  params:
+    cv: 3
+    verbose: 3
+
+model_selection:
+  module_0:
+    class: SVC
+    module: sklearn.svm
+    params:
+      kernel: poly
+      gamma: scale
+      degree: 5
+      C: 1
+    search_param_grid:
+      kernel:
+      - poly
+      - rbf
+      - sigmoid
+      gamma:
+      - scale
+      - auto
+      degree:
+      - 3
+      - 5
+      - 7
+      C:
+      - 1
+      - 10
+      - 100
+
+  module_1:
+    class: DecisionTreeClassifier
+    module: sklearn.tree
+    params:
+      splitter: best
+      min_samples_split: 2
+      min_samples_leaf: 2
+      max_features: log2
+      max_depth: 5
+      criterion: entropy
+    search_param_grid:
+      splitter:
+      - best
+      - random
+      min_samples_split:
+      - 2
+      - 5
+      - 10
+      min_samples_leaf:
+      - 1
+      - 2
+      - 4
+      max_features:
+      - sqrt
+      - log2
+      max_depth:
+      - 5
+      - 10
+      - 15
+      criterion:
+      - gini
+      - entropy
