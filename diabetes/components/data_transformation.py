@@ -72,9 +72,7 @@ class DataTransformation:
             ])
             preprocessor = ColumnTransformer(
                 [
-                    ("OneHotEncoder", oh_transformer, oh_columns),
-                    ("Ordinal_Encoder", ordinal_encoder, or_columns),
-                    ("Transformer", transform_pipe, transform_columns),
+                    
                     ("StandardScaler", numeric_transformer, num_features)
                 ]
             )
@@ -105,10 +103,11 @@ class DataTransformation:
 
                 train_df = DataTransformation.read_data(file_path=self.data_ingestion_artifact.trained_file_path)
                 test_df = DataTransformation.read_data(file_path=self.data_ingestion_artifact.test_file_path)
-                print(train_df.head())
-                print(train_df["Outcome"])
-                input_feature_train_df = train_df.drop(columns=['Outcome'], axis=1)
+                
+                input_feature_train_df = train_df.drop(TARGET_COLUMN,axis=1)
+                print(input_feature_train_df.head())
                 target_feature_train_df = train_df['Outcome']
+                print(target_feature_train_df.head())
 
                 logging.info("Got train features and test features of Training dataset")
 
@@ -116,11 +115,11 @@ class DataTransformation:
 
                 #logging.info("Added company_age column to the Training dataset")
 
-                drop_cols = self._schema_config['drop_columns']
+                #drop_cols = self._schema_config['drop_columns']
 
-                logging.info("drop the columns in drop_cols of Training dataset")
+                #logging.info("drop the columns in drop_cols of Training dataset")
 
-                input_feature_train_df = drop_columns(df=input_feature_train_df, cols = drop_cols)
+                #input_feature_train_df = drop_columns(df=input_feature_train_df, cols = drop_cols)
                 
                 target_feature_train_df = target_feature_train_df.replace(
                     TargetValueMapping()._asdict()
@@ -136,7 +135,7 @@ class DataTransformation:
 
                 #logging.info("Added company_age column to the Test dataset")
 
-                input_feature_test_df = drop_columns(df=input_feature_test_df, cols = drop_cols)
+                #input_feature_test_df = drop_columns(df=input_feature_test_df, cols = drop_cols)
 
                 logging.info("drop the columns in drop_cols of Test dataset")
 
@@ -151,6 +150,7 @@ class DataTransformation:
                 )
 
                 input_feature_train_arr = preprocessor.fit_transform(input_feature_train_df)
+                print(input_feature_train_arr)
 
                 logging.info(
                     "Used the preprocessor object to fit transform the train features"
