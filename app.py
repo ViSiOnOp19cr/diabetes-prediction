@@ -32,27 +32,27 @@ app.add_middleware(
 class DataForm:
     def __init__(self, request: Request):
         self.request: Request = request
-        self.Pregnancies: Optional[str] = None
-        self.Glucose: Optional[str] = None
-        self.BloodPressure: Optional[str] = None
-        self.SkinThickness: Optional[str] = None
-        self.Insulin: Optional[str] = None
-        self.BMI: Optional[str] = None
-        self.DiabetesPedigreeFunction: Optional[str] = None
-        self.Age: Optional[str] = None
+        self.Pregnancies: Optional[int] = None
+        self.Glucose: Optional[int] = None
+        self.BloodPressure: Optional[int] = None
+        self.SkinThickness: Optional[int] = None
+        self.Insulin: Optional[int] = None
+        self.BMI: Optional[int] = None
+        self.DiabetesPedigreeFunction: Optional[float] = None
+        self.Age: Optional[int] = None
         
         
 
     async def get_diabetes_data(self):
         form = await self.request.form()
-        self.continent = form.get("Pregnancies")
-        self.education_of_employee = form.get("Glucose")
-        self.has_job_experience = form.get("BloodPressure")
-        self.requires_job_training = form.get("SkinThickness")
-        self.no_of_employees = form.get("Insulin")
-        self.company_age = form.get("BMI")
-        self.region_of_employment = form.get("DiabetesPedigreeFunction")
-        self.prevailing_wage = form.get("Age")
+        self.Pregnancies = int(form.get("Pregnancies"))
+        self.Glucose = int(form.get("Glucose"))
+        self.BloodPressure = int(form.get("BloodPressure"))
+        self.SkinThickness = int(form.get("SkinThickness"))
+        self.Insulin = int(form.get("Insulin"))
+        self.BMI = int(form.get("BMI"))
+        self.DiabetesPedigreeFunction = float(form.get("DiabetesPedigreeFunction"))
+        self.Age = int(form.get("Age"))
         
 
 @app.get("/", tags=["authentication"])
@@ -84,17 +84,17 @@ async def predictRouteClient(request: Request):
         diabetes_data = diabetesData(
                                 Pregnancies= form.Pregnancies,
                                 Glucose=  form.Glucose,
-                                Insulin=  form.Insulin,
                                 BloodPressure= form.BloodPressure,
                                 SkinThickness= form.SkinThickness,
+                                Insulin=  form.Insulin,
                                 BMI = form.BMI,
                                 DiabetesPedigreeFunction= form.DiabetesPedigreeFunction,
-                               
                                 Age= form.Age,
                                 
                                 )
         
-        diabetes_df = diabetesData.get_diabetes_input_data_frame()
+        diabetes_df = diabetes_data.get_diabetes_input_data_frame()
+
 
         model_predictor = diabetesClassifier()
 
@@ -102,9 +102,9 @@ async def predictRouteClient(request: Request):
 
         status = None
         if value == 1:
-            status = "you have diabetes"
+            status = "diabetes positive"
         else:
-            status = "you dont have diabetes"
+            status = "diabetes negative"
 
         return templates.TemplateResponse(
             "diabetes.html",

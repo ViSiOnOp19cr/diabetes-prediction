@@ -13,12 +13,16 @@ from pandas import DataFrame
 
 class diabetesData:
     def __init__(self,
-                Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
+                Pregnancies,
+                Glucose,
+                BloodPressure,
+                SkinThickness,
+                Insulin,
+                BMI,
+                DiabetesPedigreeFunction,
+                Age
                 ):
-        """
-        Usvisa Data constructor
-        Input: all features of the trained model for prediction
-        """
+        
         try:
             self.Pregnancies = Pregnancies
             self.Glucose = Glucose
